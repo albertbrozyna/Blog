@@ -43,7 +43,7 @@ public class PersonService {
     }
 
     // Usuwa osobę na podstawie identyfikatora
-    public void deletePerson(Long id) {
+    public void deletePerson(String id) {
         personRepository.deleteById(id);
     }
 }
