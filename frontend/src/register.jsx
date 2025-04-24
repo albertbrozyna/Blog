@@ -36,7 +36,7 @@ function Register() {
 
         try {
             
-            const response = await axios.post(`${API_BASE_URL}/register`, userData);
+            const response = await axios.post("http://192.168.1.104:8080/api/register", userData);
 
             // Jeśli rejestracja zakończyła się sukcesem
             if (response.status === 200) {

@@ -14,9 +14,6 @@ public class Person {
     private String email;
     private String password;
 
-    public Person() {
-    }
-
     public Person(String lastName, String email, String firstName,String password) {
         this.lastName = lastName;
         this.email = email;
@@ -24,15 +21,13 @@ public class Person {
         this.password = password;
     }
 
-    public Person(String email,String password) {
+    public Person(String email,String password){
         this.email = email;
         this.password = password;
     }
 
-    public Person(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public Person(){
+
     }
 
     public void setFirstName(String firstName) {

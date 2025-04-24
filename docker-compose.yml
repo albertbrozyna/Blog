@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/blogdb
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/mydb
     depends_on:
       - mongo # Ensure MongoDB starts before backend
     networks:
@@ -23,7 +23,7 @@ services:
       - "27018:27017" # Default port for MongoDB
 
     environment:
-      - MONGO_INITDB_DATABASE=blogdb
+      - MONGO_INITDB_DATABASE=mydb
 
     networks:
       - mynetwork

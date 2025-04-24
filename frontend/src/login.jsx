@@ -14,7 +14,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://springboot-app:8080/api/login", {
+            const response = await axios.post("http://192.168.1.104:8080/api/login", {
                 email: email,
                 password: password,
             });
