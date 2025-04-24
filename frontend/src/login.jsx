@@ -19,7 +19,7 @@ function Login() {
                 password: password,
             });
 
-            if(response != null){
+            if(response){
                 localStorage.setItem("user", JSON.stringify(response.data));
                 setMessage("User logged succesfully.")
                 setTimeout(() => {
@@ -30,7 +30,7 @@ function Login() {
             }
         } catch (error) {
             if (error.response) {
-                setMessage(error.response.data);
+                setMessage("Email or password is incorrect.");
             } else {
                 setMessage("Something went wrong.");
             }
