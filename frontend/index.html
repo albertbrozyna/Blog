@@ -1,100 +1,13 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring Boot + NGINX</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .person {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
-</head>
-<body>
-    <h1>Lista Osób</h1>
-
-    <div id="person-list">
-        <p>Ładowanie danych...</p>
-    </div>
-
-    <h2>Dodaj osobę</h2>
-    <form id="addPersonForm">
-        <input type="text" id="firstName" placeholder="Imię" required />
-        <input type="text" id="lastName" placeholder="Nazwisko" required />
-        <input type="email" id="email" placeholder="E-mail" required />
-        <button type="submit">Dodaj</button>
-    </form>
-
-    <script>
-        // Funkcja do pobrania danych o osobach z backendu
-        async function fetchPersons() {
-            try {
-                const response = await fetch('/api/persons');
-                const data = await response.json();
-                const personList = document.getElementById('person-list');
-                personList.innerHTML = '';
-
-                if (data.length === 0) {
-                    personList.innerHTML = '<p>Brak osób w bazie.</p>';
-                } else {
-                    data.forEach(person => {
-                        const personElement = document.createElement('div');
-                        personElement.classList.add('person');
-                        personElement.innerHTML = `<strong>${person.firstName} ${person.lastName}</strong><br>E-mail: ${person.email}`;
-                        personList.appendChild(personElement);
-                    });
-                }
-            } catch (error) {
-                console.error('Błąd przy ładowaniu osób:', error);
-            }
-        }
-
-        // Funkcja do dodania nowej osoby przez formularz
-        async function addPerson(event) {
-            event.preventDefault();
-
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-
-            const newPerson = { firstName, lastName, email };
-
-            try {
-                const response = await fetch('/api/person', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(newPerson),
-                });
-
-                if (response.ok) {
-                    alert('Osoba została dodana!');
-                    fetchPersons(); // Ponowne załadowanie listy osób
-                } else {
-                    alert('Wystąpił błąd podczas dodawania osoby.');
-                }
-            } catch (error) {
-                console.error('Błąd przy dodawaniu osoby:', error);
-                alert('Wystąpił błąd podczas dodawania osoby.');
-            }
-
-            // Wyczyść formularz
-            document.getElementById('addPersonForm').reset();
-        }
-
-        // Załaduj dane po załadowaniu strony
-        document.addEventListener('DOMContentLoaded', fetchPersons);
-
-        // Obsługa formularza
-        document.getElementById('addPersonForm').addEventListener('submit', addPerson);
-    </script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyBlog</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

@@ -32,18 +32,22 @@ public class PersonService {
         return personRepository.findByLastName(lastName);
     }
 
-    // Pobiera użytkownika po emailu (zakładamy, że email powinien być unikalny)
     public Optional<Person> getPersonByEmail(String email) {
         return Optional.ofNullable(personRepository.findByEmail(email));
     }
 
     // Zapisuje nową osobę do bazy danych lub aktualizuje istniejącą
     public Person savePerson(Person person) {
-        return personRepository.save(person);
+        Optional<Person> existingPerson = getPersonByEmail(person.getEmail());
+        return existingPerson.orElseGet(() -> personRepository.save(person));
     }
 
-    // Usuwa osobę na podstawie identyfikatora
     public void deletePerson(String id) {
-        personRepository.deleteById(id);
+        Optional<Person> person = personRepository.findById(id);
+        if (person.isPresent()) {
+            personRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Person with id " + id + " does not exist");
+        }
     }
 }
