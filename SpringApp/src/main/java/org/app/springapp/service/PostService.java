@@ -12,30 +12,30 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public PostService(PostRepository postRepository){
+    public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
-    public void savePost(Post post){
+    public void savePost(Post post) {
         postRepository.save(post);
     }
 
-    public Post getPost(String id){
+    public Post getPost(String id) {
         Optional<Post> post = postRepository.findById(id);
         return post.orElse(null);
     }
 
-    public List<Post> getPosts(){
+    public List<Post> getPosts() {
         return postRepository.findAll();
     }
 
-    public void deleteAllPosts(){
+    public void deleteAllPosts() {
         postRepository.deleteAll();
     }
 
-    public Boolean deletePost(String id){
+    public Boolean deletePost(String id) {
         Optional<Post> post = postRepository.findById(id);
-        if(post.isPresent()) {
+        if (post.isPresent()) {
             postRepository.deleteById(id);
             return true; //Post deleted successfully
         }

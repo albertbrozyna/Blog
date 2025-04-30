@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {API_BASE_URL} from "./config";
+import { API_BASE_URL } from "./config";
 import axios from "axios";
 
 function Login() {
@@ -19,13 +19,13 @@ function Login() {
                 password: password,
             });
 
-            if(response){
+            if (response) {
                 localStorage.setItem("user", JSON.stringify(response.data));
                 setMessage("User logged succesfully.")
                 setTimeout(() => {
                     navigate("/blog");
                 }, 2000)
-            } else{
+            } else {
                 setMessage("Email or password is incorrect.")
             }
         } catch (error) {
@@ -50,12 +50,12 @@ function Login() {
 
 
                 <form onSubmit={handleSubmit}>
-                    <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                         <label>Email</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
 
-                    <div style={{ marginTop: "10px", display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                    <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                         <label>Password</label>
                         <input
                             type="password"
@@ -65,7 +65,7 @@ function Login() {
                         />
                     </div>
 
-                    <div style={{ marginTop: "20px",display:"flex",flexDirection:"column",justifyContent:"center" }}> 
+                    <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                         <button type="submit">
                             Login
                         </button>
@@ -74,7 +74,10 @@ function Login() {
 
                 </form >
 
-                <p style={{ marginTop: "20px", color: "blue" }}>{message}</p>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                    <p style={{color: "blue" }}>{message}</p>
+                </div>
+
 
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
 

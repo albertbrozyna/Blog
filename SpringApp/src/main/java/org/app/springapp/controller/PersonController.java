@@ -27,8 +27,8 @@ public class PersonController {
     public ResponseEntity<String> registerUser(@RequestBody Person person) {
 
         //Checking if user exists
-        if(personService.getPersonByEmail(person.getEmail()).isPresent()) {
-            return new ResponseEntity<>("Error: Email is already in use",HttpStatus.CONFLICT);
+        if (personService.getPersonByEmail(person.getEmail()).isPresent()) {
+            return new ResponseEntity<>("Error: Email is already in use", HttpStatus.CONFLICT);
         }
 
         //Adding person to database
@@ -44,8 +44,8 @@ public class PersonController {
     public ResponseEntity<Person> loginUser(@RequestBody Person person) {
         List<Person> persons = personService.getAllPersons();
 
-        for(Person p : persons) {
-            if(p.getEmail().equals(person.getEmail()) && p.getPassword().equals(person.getPassword())) {
+        for (Person p : persons) {
+            if (p.getEmail().equals(person.getEmail()) && p.getPassword().equals(person.getPassword())) {
                 p.setPassword(null);
                 return new ResponseEntity<>(p, HttpStatus.OK);
             }

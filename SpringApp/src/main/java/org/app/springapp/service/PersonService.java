@@ -12,22 +12,18 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    // Konstruktor z wstrzyknięciem zależności (Dependency Injection)
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
-    // Pobiera wszystkich użytkowników z bazy danych
     public List<Person> getAllPersons() {
         return personRepository.findAll();
     }
 
-    // Pobiera użytkownika po imieniu (zakładamy, że firstName powinno być unikalne)
     public List<Person> getPersonsByFirstName(String firstName) {
         return personRepository.findByFirstName(firstName);
     }
 
-    // Pobiera użytkownika po nazwisku
     public List<Person> getPersonsByLastName(String lastName) {
         return personRepository.findByLastName(lastName);
     }
@@ -36,7 +32,6 @@ public class PersonService {
         return Optional.ofNullable(personRepository.findByEmail(email));
     }
 
-    // Zapisuje nową osobę do bazy danych lub aktualizuje istniejącą
     public Person savePerson(Person person) {
         Optional<Person> existingPerson = getPersonByEmail(person.getEmail());
         return existingPerson.orElseGet(() -> personRepository.save(person));
