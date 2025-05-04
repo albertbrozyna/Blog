@@ -3,51 +3,44 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend # Path to your backend folder
+      context: ./backend 
     image: springboot-app
     container_name: springboot-app
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/blogdb
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/mydb
     depends_on:
-      - mongo # Ensure MongoDB starts before backend
+      - mongo
     networks:
       - mynetwork
-    restart: always # Automatically restart the container if it stops
+    restart: always 
 
   mongo:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - "27018:27017" # Default port for MongoDB
-
-    environment:
-      - MONGO_INITDB_DATABASE=blogdb
-
+      - "27018:27017" 
     networks:
       - mynetwork
     volumes:
-      - mongo-data:/data/db # Mount a volume to persist MongoDB data
-    restart: always # Automatically restart if MongoDB crashes
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx_frontend
-    volumes:
-      - ./frontend/dist:/usr/share/nginx/html # Mount the build folder to NGINX
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # NGINX config file
+      - mongo-data:/data/db 
+    restart: always 
+  frontend:
+    build:
+      context: ./frontend
+    container_name: react-app
     ports:
-      - "80:80" # Expose frontend on port 80
+      - "80:80"
     depends_on:
-      - backend # Wait for the backend to be ready
+      - backend
     networks:
       - mynetwork
-    restart: always # Automatically restart if NGINX crashes
+    restart: always
 
 networks:
   mynetwork:
-    driver: bridge # Use a custom bridge network for communication between containers
+    driver: bridge 
 
 volumes:
-  mongo-data: # Named volume for MongoDB data persistence
+  mongo-data: 

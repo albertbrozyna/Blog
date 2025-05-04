@@ -38,13 +38,13 @@ function Register() {
             
             const response = await axios.post(`${API_BASE_URL}/register`, userData);
 
-            // Jeśli rejestracja zakończyła się sukcesem
             if (response.status === 200) {
                 setMessage("Registered successfully.");
-                navigate("/");  // przekierowanie na stronę główną
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000)  
             }
         } catch (error) {
-            // Obsługa błędów, np. jeśli backend zwróci błąd (np. e-mail już istnieje)
             setMessage("Error: " + (error.response ? error.response.data : error.message));
         }
     };
@@ -97,7 +97,8 @@ function Register() {
                     Login
                 </button>
             </div>
-            <p style={{ marginTop: "50px" ,display:"flex",justifyContent:"center"}}>{message}</p>
+
+            <p style={{display:"flex",justifyContent:"center",color:"red"}}>{message}</p>
 
         </div>
     )

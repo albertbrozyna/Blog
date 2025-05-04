@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import UserProfile from './UserProfile.jsx';  // Import UserProfile component
-import LogoutButton from './LogoutButton';  // Import LogoutButton component
+import UserProfile from './UserProfile.jsx';  
+import LogoutButton from './LogoutButton';  
 import AddPostForm from './AddPostForm.jsx';
 import axios from "axios";
 import { useState, useEffect } from 'react';
@@ -40,13 +40,12 @@ export default function Blog() {
     navigate("/");
   };
 
-  // Function to handle deleting a post
+
   const handleDeletePost = async (postId) => {
     try {
       const response = await axios.delete(`${POST_BASE_URL}/delete/${postId}`);
       alert(response.data);
 
-      // Refresh post list after deleting
       const updatedPosts = posts.filter(post => post.id !== postId);
       setPosts(updatedPosts);
     } catch (error) {
@@ -89,10 +88,12 @@ export default function Blog() {
       {isLoggedIn && (
         <div style={{
           display: 'flex',
-          alignItems: 'center',
+          justifyContent: 'center',
         }}>
-          <UserProfile firstName={firstName} lastName={lastName} email={email} />
-          <LogoutButton onLogout={handleLogout} />
+          <div >
+            <UserProfile firstName={firstName} lastName={lastName} email={email} />
+            <LogoutButton onLogout={handleLogout} />
+          </div>
         </div>
       )}
       <AddPostForm onAddPost={handleAddPost} title={title} setTitle={setTitle} content={content} setContent={setContent} />
