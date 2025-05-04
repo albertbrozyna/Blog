@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import UserProfile from './UserProfile.jsx';  // Import UserProfile component
-import LogoutButton from './LogoutButton';  // Import LogoutButton component
+import UserProfile from './UserProfile.jsx';  
+import LogoutButton from './LogoutButton';  
 import AddPostForm from './AddPostForm.jsx';
 import axios from "axios";
 import { useState, useEffect } from 'react';

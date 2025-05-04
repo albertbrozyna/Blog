@@ -21,29 +21,22 @@ services:
     container_name: mongodb
     ports:
       - "27018:27017" 
-
-    environment:
-      - MONGO_INITDB_DATABASE=mydb
-
     networks:
       - mynetwork
     volumes:
       - mongo-data:/data/db 
     restart: always 
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx_frontend
-    volumes:
-      - ./frontend/dist:/usr/share/nginx/html 
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf 
+  frontend:
+    build:
+      context: ./frontend
+    container_name: react-app
     ports:
-      - "80:80" 
+      - "80:80"
     depends_on:
-      - backend 
+      - backend
     networks:
       - mynetwork
-    restart: always 
+    restart: always
 
 networks:
   mynetwork:

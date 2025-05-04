@@ -14,7 +14,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://192.168.1.104:8080/api/login", {
+            const response = await axios.post(`${API_BASE_URL}/login`, {
                 email: email,
                 password: password,
             });
