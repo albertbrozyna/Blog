@@ -36,17 +36,6 @@ public class PostController {
     }
 
 
-    @GetMapping("/post")
-    public ResponseEntity<Post> getPostById(String id) {
-        Post post = postService.getPost(id);
-
-        if (post == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(post, HttpStatus.OK);
-    }
-
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable String id) {
         try {
